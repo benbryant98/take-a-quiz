@@ -13,20 +13,20 @@ var questionBank = [
     correct: "C",
   }),
   (question2 = {
-    text: "Question  Placeholder",
+    text: "Question 2 Placeholder",
     a: "A",
     b: "B",
     c: "C",
     d: "D",
-    correct: "C",
+    correct: "A",
   }),
   (question3 = {
-    text: "Question  Placeholder",
+    text: "Question 3 Placeholder",
     a: "A",
     b: "B",
     c: "C",
     d: "D",
-    correct: "C",
+    correct: "D",
   }),
   (question4 = {
     text: "Question  Placeholder",
@@ -85,20 +85,18 @@ var questionBank = [
     correct: "C",
   }),
 ];
-// creates random constant for use to pick a random question
-const random = Math.floor(Math.random() * questionBank.length);
-
-// defines question variable as random question from bank
-var question = questionBank[random];
-
-var rightAns = "";
-console.log(rightAns);
 
 var counter = 60;
 timeDisplay.append("" + counter);
+// setting global variable
+qIndex = 0;
 
-function askQuestion(text, a, b, c, d, correct) {
+function askQuestion() {
   text = $("<h2>");
+  text.addClass("questionText");
+
+  question = questionBank[qIndex];
+  console.log(question);
 
   // defines parameters of function with properties of selected question property
   text = question["text"];
@@ -106,7 +104,7 @@ function askQuestion(text, a, b, c, d, correct) {
   b = question["b"];
   c = question["c"];
   d = question["d"];
-  rightAns = question["correct"];
+  rightAns = question.correct;
 
   // placeholder array to make creating questions more efficient with for loop
   let x = [a, b, c, d];
@@ -116,10 +114,27 @@ function askQuestion(text, a, b, c, d, correct) {
   for (i = 0; i < x.length; i++) {
     let ansBtn = $("<button>");
     ansBtn.text(x[i]);
+    // styling class
     ansBtn.addClass("ansBtn");
-    ansBtn.attr("data-answer", x[i]);
+    // ansBtn.attr("data-answer", x[i]);
     questionBox.append(ansBtn);
   }
+
+  qIndex++;
+  // return values for use in events
+  return rightAns, qIndex;
+}
+
+// remvoes previous question and prompts new one with clickable buttons
+function nextQuestion() {
+  $("#questionBox").empty();
+  askQuestion();
+  $(questionBox).removeClass("unclickable");
+}
+
+startBtn.addEventListener("click", function () {
+  home.style.display = "none";
+  askQuestion();
 
   // counts timer down by one every second
   var gameTimer = setInterval(function () {
@@ -127,23 +142,34 @@ function askQuestion(text, a, b, c, d, correct) {
     timeDisplay.text("Time Left: " + counter);
     if (counter <= 0) {
       clearInterval(gameTimer);
+      // sets counter back to zero when below zero
       counter = 0;
+      timeDisplay.text("Time Left: " + counter);
     }
   }, 1000);
-}
-
-startBtn.addEventListener("click", function () {
-  home.style.display = "none";
-  askQuestion();
 });
 
+// event handler for clicks on answer buttons
 questionBox.on("click", ".ansBtn", function (event) {
-  var response = event.target;
-  if (response === rightAns) {
-    $(event.target).addClass("correct");
-    counter += 5;
+  var response = event.target.textContent;
+
+  // prevents user from clicking multiple times to get time boost
+  if ($(questionBox).hasClass("unclickable")) {
+    event.preventDefault();
   } else {
-    $(event.target).addClass("incorrect");
-    counter -= 10;
+    $(questionBox).addClass("unclickable");
+
+    // adds class for correct/incorrect styling and changes time
+    if (response === rightAns) {
+      $(event.target).addClass("correct");
+      counter += 5;
+      console.log("Correct!");
+    } else {
+      $(event.target).addClass("incorrect");
+      counter -= 10;
+      console.log("Incorrect!");
+    }
+
+    setTimeout(nextQuestion, 2000);
   }
 });
