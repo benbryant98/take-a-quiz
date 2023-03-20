@@ -1,0 +1,23 @@
+@font-face {
+  font-family: collegeFont;
+  src: url(college.ttf);
+}
+
+#timer {
+  position: absolute;
+  top: 0;
+  right: 0;
+  margin-right: 20px;
+  font-size: 35px;
+  font-variant: small-caps;
+  font-family: collegeFont;
+}
+
+body {
+  background-color: steelblue;
+}
+
+#home h1 {
+  color: darkturquoise;
+  font-family: groovyVibes;
+}
