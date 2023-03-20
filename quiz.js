@@ -41,7 +41,8 @@ var questionBank = [
 var counter = 60;
 timeDisplay.append("" + counter);
 // setting global variable
-qIndex = 0;
+var qIndex = 0;
+var score = 0;
 
 function askQuestion() {
   text = $("<h2>");
@@ -77,10 +78,15 @@ function askQuestion() {
   return rightAns, qIndex;
 }
 
-// remvoes previous question and prompts new one with clickable buttons
+// removes previous question and prompts new one with clickable buttons
 function nextQuestion() {
   $("#questionBox").empty();
-  askQuestion();
+  if (qIndex < $(questionBank).length) {
+    askQuestion();
+  } else {
+    counter = 0;
+    quizComplete();
+  };
   $(questionBox).removeClass("unclickable");
 }
 
@@ -115,13 +121,43 @@ questionBox.on("click", ".ansBtn", function (event) {
     if (response === rightAns) {
       $(event.target).addClass("correct");
       counter += 5;
+      score++;
       console.log("Correct!");
     } else {
       $(event.target).addClass("incorrect");
       counter -= 10;
+      score--;
       console.log("Incorrect!");
     }
 
     setTimeout(nextQuestion, 2000);
   }
+});
+
+function quizComplete() {
+    $('#timer').remove();
+    console.log('test');
+    $("#questionBox").empty();
+    var form = document.createElement("form");
+    form.setAttribute("method", "post");
+    form.setAttribute("action", "submit.php");
+    form.setAttribute('id', 'formId');
+    var initials = document.createElement('input');
+    initials.setAttribute('type', 'text');
+    initials.setAttribute('placeholder', 'Initials');
+    initials.setAttribute('id', 'initials');
+    form.append(initials);
+    var subBtn = $('<button>');
+    subBtn.text("Submit");
+    subBtn.addClass('subBtn');
+    questionBox.append(form);
+    questionBox.append(subBtn);
+};
+
+questionBox.on('click', '.subBtn', function() {
+    var initials = $('#initials').val();
+    var savedData = [initials, score];
+    localStorage.setItem('savedData', JSON.stringify(savedData));
+    $('#formId').children('input').val('');
+    location.href = "highscore.html";
 });
