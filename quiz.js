@@ -69,7 +69,6 @@ function askQuestion() {
     ansBtn.text(x[i]);
     // styling class
     ansBtn.addClass("ansBtn");
-    // ansBtn.attr("data-answer", x[i]);
     questionBox.append(ansBtn);
   }
 
@@ -156,8 +155,13 @@ function quizComplete() {
 
 questionBox.on('click', '.subBtn', function() {
     var initials = $('#initials').val();
-    var savedData = [initials, score];
-    localStorage.setItem('savedData', JSON.stringify(savedData));
+    var savedData = {
+        initials: initials.value, 
+        score: score
+    };
+    var prevData = JSON.parse(localStorage.getItem('savedData')) || [];
+    prevData.push(savedData);
+    localStorage.setItem('savedData', JSON.stringify(prevData));
     $('#formId').children('input').val('');
     location.href = "highscore.html";
 });

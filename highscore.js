@@ -6,12 +6,19 @@ backBtn.addEventListener ("click", function () {
     location.href = "quiz.html";
 });
 
-clearBtn.on ('click', function () {
+$(clearBtn).on ('click', function () {
     localStorage.clear();
+    $(highScores).empty();
 });
 
-const li = $('<li>');
-const data = JSON.parse(localStorage.getItem('savedData'));
-data.forEach((item) => {
-    
-})
+savedData = [JSON.parse(localStorage.getItem('savedData'))];
+
+for (i=0; i < savedData.length; i++) {
+    // let initials = savedData[i][0];
+    // console.log(JSON.stringify(initials));
+    // let score = savedData[i][1];
+    console.log(savedData[0][i][0]);
+    let liItem = $('<li>');
+    liItem.text(savedData[0][0][0].value);
+    highScores.append(liItem);
+}
