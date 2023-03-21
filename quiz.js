@@ -170,5 +170,5 @@ questionBox.on("click", ".subBtn", function () {
   prevData.push(savedData);
   localStorage.setItem("savedData", JSON.stringify(prevData));
   $("#formId").children("input").val("");
-  location.href = "highscore.html";
+  location.href = "highscore/highscore.html";
 });
