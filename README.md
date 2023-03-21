@@ -7,3 +7,5 @@ A fun JavaScript quiz to test your mind and see how you do against a timer! The 
 ![Deployed Website](images/WebsiteSnapshot.PNG)
 
 # Deployed Application
+
+https://benbryant98.github.io/take-a-quiz/
