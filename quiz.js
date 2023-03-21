@@ -85,7 +85,7 @@ function nextQuestion() {
   } else {
     counter = 0;
     quizComplete();
-  };
+  }
   $(questionBox).removeClass("unclickable");
 }
 
@@ -125,7 +125,6 @@ questionBox.on("click", ".ansBtn", function (event) {
     } else {
       $(event.target).addClass("incorrect");
       counter -= 10;
-      score--;
       console.log("Incorrect!");
     }
 
@@ -134,34 +133,37 @@ questionBox.on("click", ".ansBtn", function (event) {
 });
 
 function quizComplete() {
-    $('#timer').remove();
-    console.log('test');
-    $("#questionBox").empty();
-    var form = document.createElement("form");
-    form.setAttribute("method", "post");
-    form.setAttribute("action", "submit.php");
-    form.setAttribute('id', 'formId');
-    var initials = document.createElement('input');
-    initials.setAttribute('type', 'text');
-    initials.setAttribute('placeholder', 'Initials');
-    initials.setAttribute('id', 'initials');
-    form.append(initials);
-    var subBtn = $('<button>');
-    subBtn.text("Submit");
-    subBtn.addClass('subBtn');
-    questionBox.append(form);
-    questionBox.append(subBtn);
-};
+  $("#timer").remove();
+  console.log("test");
+  $("#questionBox").empty();
+  var form = document.createElement("form");
+  form.setAttribute("method", "post");
+  form.setAttribute("action", "submit.php");
+  form.setAttribute("id", "formId");
+  var initials = document.createElement("input");
+  initials.setAttribute("type", "text");
+  initials.setAttribute("placeholder", "Initials");
+  initials.setAttribute("id", "initials");
+  form.append(initials);
+  var subBtn = $("<button>");
+  let finalScore = $("<h2>");
+  finalScore.text("Final Score: " + score);
+  subBtn.text("Submit Score");
+  subBtn.addClass("subBtn");
+  questionBox.append(form);
+  questionBox.append(finalScore);
+  questionBox.append(subBtn);
+}
 
-questionBox.on('click', '.subBtn', function() {
-    var initials = $('#initials').val();
-    var savedData = {
-        initials: initials.value, 
-        score: score
-    };
-    var prevData = JSON.parse(localStorage.getItem('savedData')) || [];
-    prevData.push(savedData);
-    localStorage.setItem('savedData', JSON.stringify(prevData));
-    $('#formId').children('input').val('');
-    location.href = "highscore.html";
+questionBox.on("click", ".subBtn", function () {
+  var initials = $("#initials").val();
+  var savedData = {
+    initials: initials.value,
+    score: score,
+  };
+  var prevData = JSON.parse(localStorage.getItem("savedData")) || [];
+  prevData.push(savedData);
+  localStorage.setItem("savedData", JSON.stringify(prevData));
+  $("#formId").children("input").val("");
+  location.href = "highscore.html";
 });

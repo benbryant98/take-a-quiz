@@ -1,11 +1,15 @@
 @font-face {
   font-family: collegeFont;
-  src: url(college.ttf);
+  src: url("fonts/college.ttf") format("truetype");
+}
+@font-face {
+  font-family: cartoonQueen;
+  src: url("fonts/Cartoon\ Queen.ttf") format("truetype");
 }
 
 #timer {
   position: absolute;
-  top: 0;
+  top: -8px;
   right: 0;
   margin-right: 20px;
   font-size: 35px;
@@ -18,6 +22,72 @@ body {
 }
 
 #home h1 {
-  color: darkturquoise;
-  font-family: groovyVibes;
+  color: darkblue;
+  text-align: center;
+  font-family: cartoonQueen;
+  font-size: 50px;
+  -webkit-text-stroke: 2px;
+  -webkit-text-stroke-color: black;
+}
+
+#home p {
+  color: white;
+  background-color: darkblue;
+  padding: 10px;
+  border-radius: 25%;
+  text-align: center;
+  font-family: monospace;
+  font-weight: lighter;
+}
+
+#scoresHeader {
+  font-family: "Lucida Sans", "Lucida Sans Regular", "Lucida Grande",
+    "Lucida Sans Unicode", Geneva, Verdana, sans-serif;
+  color: hotpink;
+  font-weight: 300;
+  text-decoration: underline;
+  -webkit-text-stroke: 1px;
+  -webkit-text-stroke-color: black;
+}
+
+#startBtn {
+  background-color: gold;
+  color: white;
+  font-weight: bold;
+  font-family: Impact, Haettenschweiler, "Arial Narrow Bold", sans-serif;
+  letter-spacing: 4px;
+  -webkit-text-stroke: 1px;
+  -webkit-text-stroke-color: black;
+  text-align: center;
+  position: absolute;
+  padding: 15px 32px;
+  font-size: 25px;
+  border-radius: 15%;
+  left: 42%;
+}
+
+.ansBtn {
+  display: block;
+  margin-top: 4px;
+  background-color: lightskyblue;
+  font-family: collegeFont;
+  font-size: 18px;
+}
+
+.correct {
+  background-color: chartreuse;
+  color: white;
+}
+
+.incorrect {
+  background-color: crimson;
+  color: black;
+}
+
+.subBtn {
+  background-color: blue;
+  color: white;
+  font-family: "Lucida Sans", "Lucida Sans Regular", "Lucida Grande",
+    "Lucida Sans Unicode", Geneva, Verdana, sans-serif;
+  border-radius: 16px;
 }
