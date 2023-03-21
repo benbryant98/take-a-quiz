@@ -3,7 +3,7 @@ var clearBtn = document.getElementById("clearBtn");
 var highScores = document.getElementById("sortedScores");
 
 backBtn.addEventListener("click", function () {
-  location.href = "quiz.html";
+  location.href = "index.html";
 });
 
 $(clearBtn).on("click", function () {
