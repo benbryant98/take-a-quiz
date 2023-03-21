@@ -1,0 +1,22 @@
+#scoresHeader {
+  font-family: "Lucida Sans", "Lucida Sans Regular", "Lucida Grande",
+    "Lucida Sans Unicode", Geneva, Verdana, sans-serif;
+  color: hotpink;
+  font-weight: 300;
+  text-decoration: underline;
+  -webkit-text-stroke: 1px;
+  -webkit-text-stroke-color: black;
+}
+
+#sortedScores {
+  font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+  color: goldenrod;
+  font-size: 20px;
+  font-weight: bolder;
+  -webkit-text-stroke: 1px;
+  -webkit-text-stroke-color: black;
+}
+
+body {
+  background-color: rgb(67, 127, 184);
+}
