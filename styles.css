@@ -18,7 +18,7 @@
 }
 
 body {
-  background-color: steelblue;
+  background-color: rgb(67, 127, 184);
 }
 
 #home h1 {
@@ -50,6 +50,15 @@ body {
   -webkit-text-stroke-color: black;
 }
 
+#sortedScores {
+  font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+  color: goldenrod;
+  font-size: 20px;
+  font-weight: bolder;
+  -webkit-text-stroke: 1px;
+  -webkit-text-stroke-color: black;
+}
+
 #startBtn {
   background-color: gold;
   color: white;
@@ -63,7 +72,7 @@ body {
   padding: 15px 32px;
   font-size: 25px;
   border-radius: 15%;
-  left: 42%;
+  left: 47%;
 }
 
 .ansBtn {

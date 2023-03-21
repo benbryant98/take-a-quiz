@@ -133,23 +133,31 @@ questionBox.on("click", ".ansBtn", function (event) {
 });
 
 function quizComplete() {
+  // removes timer and question
   $("#timer").remove();
-  console.log("test");
   $("#questionBox").empty();
+
+  // create form for input element
   var form = document.createElement("form");
   form.setAttribute("method", "post");
   form.setAttribute("action", "submit.php");
   form.setAttribute("id", "formId");
+
+  // create input box for initials
   var initials = document.createElement("input");
   initials.setAttribute("type", "text");
   initials.setAttribute("placeholder", "Initials");
   initials.setAttribute("id", "initials");
   form.append(initials);
+
+  // display final score and create submit button
   var subBtn = $("<button>");
   let finalScore = $("<h2>");
   finalScore.text("Final Score: " + score);
   subBtn.text("Submit Score");
   subBtn.addClass("subBtn");
+
+  // append changes to document
   questionBox.append(form);
   questionBox.append(finalScore);
   questionBox.append(subBtn);
@@ -157,10 +165,7 @@ function quizComplete() {
 
 questionBox.on("click", ".subBtn", function () {
   var initials = $("#initials").val();
-  var savedData = {
-    initials: initials.value,
-    score: score,
-  };
+  var savedData = [initials, score];
   var prevData = JSON.parse(localStorage.getItem("savedData")) || [];
   prevData.push(savedData);
   localStorage.setItem("savedData", JSON.stringify(prevData));

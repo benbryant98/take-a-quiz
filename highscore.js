@@ -1,24 +1,22 @@
 var backBtn = document.getElementById("backBtn");
 var clearBtn = document.getElementById("clearBtn");
-var highScores = document.getElementById('sortedScores');
+var highScores = document.getElementById("sortedScores");
 
-backBtn.addEventListener ("click", function () {
-    location.href = "quiz.html";
+backBtn.addEventListener("click", function () {
+  location.href = "quiz.html";
 });
 
-$(clearBtn).on ('click', function () {
-    localStorage.clear();
-    $(highScores).empty();
+$(clearBtn).on("click", function () {
+  localStorage.clear();
+  $(highScores).empty();
 });
 
-savedData = [JSON.parse(localStorage.getItem('savedData'))];
+savedData = JSON.parse(localStorage.getItem("savedData"));
 
-for (i=0; i < savedData.length; i++) {
-    // let initials = savedData[i][0];
-    // console.log(JSON.stringify(initials));
-    // let score = savedData[i][1];
-    console.log(savedData[0][i][0]);
-    let liItem = $('<li>');
-    liItem.text(savedData[0][0][0].value);
-    highScores.append(liItem);
+for (i = 0; i < savedData.length; i++) {
+  let initials = savedData[i][0];
+  let score = savedData[i][1];
+  let liItem = $("<li>");
+  liItem.html(initials + " | " + score);
+  $(highScores).append(liItem);
 }
